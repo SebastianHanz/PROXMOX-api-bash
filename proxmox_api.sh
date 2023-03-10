@@ -43,7 +43,7 @@ start | stop | reboot | resume | shutdown | suspend)
     ;;
 
 custom)
-    curl --silent --insecure --cookie "$(<cookie)" --header "$(<token)" -X POST https://$PROXMOX_NODE_IP:8006/api2/json/nodes/$2
+    curl --silent --insecure --cookie "$(<cookie)" --header "$(<token)" -X $2 "https://$PROXMOX_NODE_IP:8006/api2/json/nodes/$3"
     echo "  done."
     ;;
 
@@ -59,9 +59,9 @@ delete)
 
 *)
     echo ""
-    echo " usage:  start|stop|reboot|resume|shutdown|suspend lxc|vm <vmid> #Simply start,stop,reboot.. your lxc or vm"
-    echo " usage:  custom node3/lxc/155/status/reboot #Adding custom commands without typing static URL parts (https://$PROXMOX_NODE_IP:8006/api2/json/nodes/)"
-    echo " usage:  create|delete <vmid> "
+    echo " usage:  start|stop|reboot|resume|shutdown|suspend lxc|vm <vmid>      # Simply start,stop,reboot.. your lxc or vm"
+    echo " usage:  custom GET|PUT|POST node3/lxc/155/status/reboot              # Adding custom commands without typing static URL parts like (https://$PROXMOX_NODE_IP:8006/api2/json/nodes/)"
+    echo " usage:  create|delete <vmid>                                         # Create a lxc from the standard container config" 
     echo ""
     ;;
 
