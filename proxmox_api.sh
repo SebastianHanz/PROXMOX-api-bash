@@ -59,9 +59,17 @@ delete)
 
 *)
     echo ""
-    echo " usage:  start|stop|reboot|resume|shutdown|suspend lxc|vm <vmid>      # Simply start,stop,reboot.. your lxc or vm"
-    echo " usage:  custom GET|PUT|POST node3/lxc/155/status/reboot              # Adding custom commands without typing static URL parts like (https://$PROXMOX_NODE_IP:8006/api2/json/nodes/)"
-    echo " usage:  create|delete <vmid>                                         # Create a lxc from the standard container config" 
+    echo "Here are some methods to use this script: "
+    echo ""
+    echo "1.Simply start,stop,reboot.. your lxc or vm"
+    echo " Syntax: start|stop|reboot|resume|shutdown|suspend lxc|vm <vmid>"
+    echo " Example: ./proxmox_api.sh start vm 180"
+    echo ""
+    echo "2.Use custom commands without retyping static URL part (https://$PROXMOX_NODE_IP:8006/api2/json/nodes/*)"
+    echo " Syntax: custom GET|POST|PUT your/command/extending/static/url"
+    echo " Example: ./proxmox_api.sh custom PUT node3/lxc/100/config?memory=1024"
+    echo ""
+    echo "3.Create or delete LXC's from own config:  create|delete <vmid>"
     echo ""
     ;;
 
