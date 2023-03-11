@@ -77,4 +77,3 @@ esac
 
 # Remove temporary files
 rm cookie message token
-rm cookie message token
