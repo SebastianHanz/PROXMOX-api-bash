@@ -25,7 +25,7 @@ CPUUNITS=512
 MEMORY=512
 DISK=4G
 SWAP=0
-OS_TEMPLATE="IMAGES:vztmpl/centos-8-default_20191016_amd64.tar.xz"
+OS_TEMPLATE="local:vztmpl/debian-10-standard_10.7-1_amd64.tar.gz"
 
 
 # Available script functions
@@ -48,7 +48,7 @@ custom)
     ;;
 
 create)
-    curl --insecure --cookie "$(<cookie)" --header "$(<token)" -X POST --data-urlencode net0="name=tnet$2,bridge=vmbr0" --data ostemplate=$OS_TEMPLATE --data storage=$PROXMOX_STORAGE --data vmid=$2 --data cores=$CPU --data cpuunits=$CPUUNITS --data memory=$MEMORY --data swap=$SWAP --data hostname=ctnode$2 https://$PROXMOX_NODE_IP:8006/api2/json/nodes/$PROXMOX_NODE_NAME/lxc
+    curl --insecure --cookie "$(<cookie)" --header "$(<token)" -X POST --data-urlencode net0="name=tnet$2,bridge=vmbr0" --data ostemplate=$OS_TEMPLATE --data storage=$PROXMOX_STORAGE --data vmid=$2 --data cores=$CPU --data cpuunits=$CPUUNITS --data memory=$MEMORY --data swap=$SWAP --data hostname=$3 https://$PROXMOX_NODE_IP:8006/api2/json/nodes/$PROXMOX_NODE_NAME/lxc
     echo "  done."
     ;;
 
@@ -69,7 +69,7 @@ delete)
     echo " Syntax: custom GET|POST|PUT your/command/extending/static/url"
     echo " Example: ./proxmox_api.sh custom PUT node3/lxc/100/config?memory=1024"
     echo ""
-    echo "3.Create or delete LXC's from own config:  create|delete <vmid>"
+    echo "3.Create or delete LXC's from own config:  create|delete <vmid> hostname"
     echo ""
     ;;
 
